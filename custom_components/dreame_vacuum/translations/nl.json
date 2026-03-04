@@ -165,9 +165,9 @@
       "carpet_cleaning": {
         "state": {
           "avoidance": "Vermijden",
-          "adaptation": "Aanpassen",
+          "adaptation": "Aangepast",
           "remove_mop": "Dweil Verwijderen",
-          "adaptation_without_route": "Aanpassing Zonder Route",
+          "adaptation_without_route": "Aangepast Zonder Route",
           "vacuum_and_mop": "Stofzuigen en dweilen",
           "ignore": "Negeren",
           "cross": "Oversteken"
@@ -259,7 +259,7 @@
       "auto_lds_coverage": {
         "state": {
           "off": "Uit",
-          "security": "Beveiliging",
+          "security": "Veilig",
           "extreme": "Extreem"
         }
       },
@@ -312,8 +312,8 @@
       },
       "cleangenius_mode": {
         "state": {
-          "vacuum_and_mop": "Vacuüm en dweil",
-          "mop_after_vacuum": "Dweil na vacuüm"
+          "vacuum_and_mop": "Stofzuigen en dweilen",
+          "mop_after_vacuum": "Dweilen na stofzuigen"
         }
       },
       "washing_mode": {
@@ -445,8 +445,8 @@
           "room_cleaning": "Kamerschoonmaak",
           "zone_cleaning": "Zone schoonmaken",
           "fast_mapping": "Snelle kaartopbouw",
-          "cruising_path": "Cruisen op pad",
-          "cruising_point": "Naar punt cruisen",
+          "cruising_path": "Rijden op pad",
+          "cruising_point": "Naar punt rijden",
           "summon_clean": "Oproepen om schoon te maken",
           "shortcut": "Snelkoppeling",
           "person_follow": "Persoon volgen",
@@ -473,10 +473,10 @@
           "room_mopping_paused": "Kamer dweilen gepauzeerd",
           "zone_docking_paused": "Zone docking gepauzeerd",
           "room_docking_paused": "Kamer docking gepauzeerd",
-          "cruising_path": "Cruisen op pad",
-          "cruising_path_paused": "Cruisen op pad gepauzeerd",
-          "cruising_point": "Naar punt cruisen",
-          "cruising_point_paused": "Naar punt cruisen gepauzeerd",
+          "cruising_path": "Rijden op pad",
+          "cruising_path_paused": "Rijden op pad gepauzeerd",
+          "cruising_point": "Naar punt rijden",
+          "cruising_point_paused": "Naar punt rijden gepauzeerd",
           "summon_clean_paused": "Oproepen om schoon te maken gepauzeerd",
           "returning_to_install_mop": "Terugkeren om dweil te installeren",
           "returning_to_remove_mop": "Terugkeren om dweil te verwijderen",
@@ -526,12 +526,12 @@
         "state": {
           "unknown": "Onbekende foutcode",
           "no_error": "Geen fout",
-          "drop": "Wielen zijn opgehangen",
+          "drop": "De wielen hangen",
           "cliff": "Klifsensorfout",
           "bumper": "Botsingssensor zit vast",
           "gesture": "Robot is gekanteld",
           "bumper_repeat": "Botsingssensor zit vast",
-          "drop_repeat": "Wielen zijn opgehangen",
+          "drop_repeat": "De wielen hangen",
           "optical_flow": "Optische stroomsensorfout",
           "no_box": "Stofbak niet geïnstalleerd",
           "no_tank_box": "Watertank niet geïnstalleerd",
@@ -582,7 +582,7 @@
           "ultrasonic": "De ultrasone sensor werkt niet goed.",
           "no_go_zone": "No-Go zone of virtuele muur gedetecteerd.",
           "route": "Schoonmaakroute is geblokkeerd.",
-          "restricted": "Gedetecteerd dat de stofzuig-robot in een beperkt gebied is.",
+          "restricted": "De stofzuig-robot is in een beperkt gebied gedetecteerd.",
           "remove_mop": "Dweilen voltooid. Verwijder en reinig de dweil op tijd.",
           "mop_removed": "De dweilpad is losgekomen tijdens de schoonmaaktaak.",
           "mop_pad_stop_rotate": "De dweilpad is gestopt met draaien.",
@@ -614,7 +614,7 @@
           "robot_stuck_repeat": "Verplaats de robot naar een open gebied en hervat de taak.",
           "slippery_floor": "Gladde vloer. Probeer het later opnieuw.",
           "check_mop_install": "Controleer of de dweil correct is geïnstalleerd.",
-          "dirty_water_tank_full": "Abnormaal waterpeil in vuilwatertank.",
+          "dirty_water_tank_full": "De vuilwatertank is vol.",
           "retractable_leg_stuck": "Controleer of de intrekbare poten verstrikt zijn geraakt.",
           "internal_error": "Storing door interne fout. Probeer de robot opnieuw op te starten.",
           "robot_stuck_on_tables": "Robot zit vast tussen tafels en stoelen.",
@@ -625,7 +625,7 @@
           "robot_stuck_on_obstacle": "Robot heeft obstakels gedetecteerd.",
           "robot_stuck_on_pet": "Robot heeft mensen of huisdieren gedetecteerd.",
           "robot_stuck_on_slippery_surface": "Robot zit vast door uitglijden.",
-          "robot_stuck_on_carpet": "Robot glijdt uit op tapijt",
+          "robot_stuck_on_carpet": "Robot zit vast op een tapijt",
           "drainage_failed": "Abnormale afvoer uit vuilwatertank",
           "mop_not_detected": "Dweil niet gedetecteerd.",
           "mop_holder_error": "Fout aantal/plaatsing dweilhouder in station.",
@@ -679,10 +679,10 @@
           "no_warning": "Geen waarschuwing",
           "no_water_left_dismiss": "Controleer de schoon watertank.",
           "no_water_left": "Het water in de schoon watertank is bijna op. Controleer en vul de schoon watertank tijdig.",
-          "no_water_left_after_clean": "De mop pad is gereinigd. Geconstateerd dat het water in de schoon watertank onvoldoende is, vul de schoon watertank en leeg de gebruikte watertank.",
+          "no_water_left_after_clean": "De dweil is gereinigd. Geconstateerd dat het water in de schoon watertank onvoldoende is, vul de schoon watertank en leeg de vuilwatertank.",
           "no_water_for_clean": "Laag waterniveau in de schoon watertank. De robot is overgeschakeld naar stofzuigmodus.",
-          "low_water": "Bijna geen water meer. Vul de schoon watertank.",
-          "tank_not_installed": "De schoon watertank is niet geïnstalleerd."
+          "low_water": "Bijna geen water meer. Vul de schoonwatertank.",
+          "tank_not_installed": "De schoonwatertank is niet geïnstalleerd."
         }
       },
       "stream_status": {
@@ -691,7 +691,7 @@
           "idle": "Inactief",
           "video": "Video",
           "audio": "Audio",
-          "recording": "Opname"
+          "recording": "Opnemen"
         }
       },
       "drainage_status": {
@@ -724,21 +724,21 @@
           "unknown": "Onbekend",
           "installed": "Geïnstalleerd",
           "not_installed": "Niet geïnstalleerd",
-          "check": "Rekening"
+          "check": "Controleer"
         }
       },
       "detergent_status": {
         "state": {
           "unknown": "Onbekend",
           "installed": "Geïnstalleerd",
-          "disabled": "Gehandicapt",
+          "disabled": "Uitgeschakeld",
           "low_detergent": "Lage wasmiddel"
         }
       },
       "hot_water_status": {
         "state": {
           "unknown": "Onbekend",
-          "disabled": "Gehandicapt",
+          "disabled": "Uitgeschakeld",
           "enabled": "Ingeschakeld"
         }
       },
@@ -746,7 +746,7 @@
         "state": {
           "unknown": "Onbekend",
           "idle": "Inactief",
-          "draining": "Aftappend"
+          "draining": "Afvoeren"
         }
       },
       "task_type": {
@@ -774,7 +774,7 @@
           "stain_cleaning": "Vlekkenreiniging",
           "initial_deep_cleaning": "Initiële diepe reiniging",
           "initial_deep_cleaning_paused": "Initiële diepe reiniging gepauzeerd",
-          "mop_pad_heating": "Mop‑pad verwarming",
+          "mop_pad_heating": "Dweil verwarming",
           "cleaning_after_mapping": "Reiniging na mapping",
           "small_particle_cleaning": "Reiniging kleine deeltjes",
           "changing_mop": "Dweil vervangen",
@@ -1098,7 +1098,7 @@
         },
         "cleaning_mode": {
           "name": "Schoonmaakmodus",
-          "description": "Schoonmaakmodus voor elke ruimte (alleen ondersteund op stofzuigers met een mophouderfunctie)."
+          "description": "Schoonmaakmodus voor elke ruimte (alleen ondersteund op stofzuigers met een dweilhouderfunctie)."
         },
         "repeats": {
           "name": "Herhalingen",
@@ -1130,7 +1130,7 @@
     },
     "vacuum_set_restricted_zone": {
       "name": "Beperkte Zone Instellen",
-      "description": "Definieer virtuele muren, beperkte zones en/of no-mop zones.",
+      "description": "Definieer virtuele muren, beperkte zones en/of niet dweilen zones.",
       "fields": {
         "walls": {
           "name": "Muren",
@@ -1141,8 +1141,8 @@
           "description": "No-go zones."
         },
         "no_mops": {
-          "name": "No Mop Zones",
-          "description": "No-mop zones."
+          "name": "Niet dweilen Zones",
+          "description": "Niet dweilen zones."
         }
       }
     },
