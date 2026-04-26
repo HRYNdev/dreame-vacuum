@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import voluptuous as vol
 from typing import Final
-import importlib
 
 from .coordinator import DreameVacuumDataUpdateCoordinator
 from .entity import DreameVacuumEntity
 
+from dataclasses import dataclass
 from homeassistant.helpers.importlib import async_import_module
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -572,21 +572,6 @@ async def async_setup_entry(
                         )
                     ],
                 ),
-                vol.All(
-                    list,
-                    [
-                        vol.ExactSequence(
-                            [
-                                vol.Coerce(int),
-                                vol.Coerce(int),
-                                vol.Coerce(int),
-                                vol.Coerce(int),
-                                vol.Coerce(int),
-                                vol.Coerce(int),
-                            ]
-                        )
-                    ],
-                ),
             ),
         },
         DreameVacuum.async_set_carpet_area.__name__,
@@ -822,7 +807,7 @@ async def async_setup_entry(
     platform.async_register_entity_service(
         SERVICE_SET_SEGMENT_TYPE,
         {
-            vol.Required(INPUT_TYPE): vol.Any(dict[int, list[int]]),
+            vol.Required(INPUT_TYPE): vol.Any(dict[str, list[int]]),
             vol.Optional(INPUT_MAP_ID): vol.Coerce(int),
         },
         DreameVacuum.async_set_segment_type.__name__,
@@ -840,7 +825,7 @@ async def async_setup_entry(
     platform.async_register_entity_service(
         SERVICE_SET_FLOOR_MATERIAL,
         {
-            vol.Required(INPUT_MATERIAL): vol.Any(dict[int, list[int]]),
+            vol.Required(INPUT_MATERIAL): vol.Any(dict[str, list[int]]),
             vol.Optional(INPUT_MAP_ID): vol.Coerce(int),
         },
         DreameVacuum.async_set_floor_material.__name__,
@@ -916,7 +901,7 @@ async def async_setup_entry(
     platform.async_register_entity_service(
         SERVICE_SET_MOP_TYPE,
         {
-            vol.Required(INPUT_MOP_TYPE): vol.Any(dict[int, str]),
+            vol.Required(INPUT_MOP_TYPE): vol.Any(dict[str, str]),
             vol.Optional(INPUT_MAP_ID): vol.Coerce(int),
         },
         DreameVacuum.async_set_mop_type.__name__,
@@ -1037,8 +1022,9 @@ class DreameVacuum(DreameVacuumEntity, StateVacuumEntity):
             | VacuumEntityFeature.PAUSE
             | VacuumEntityFeature.STOP
             | VacuumEntityFeature.RETURN_HOME
-            | CLEAN_AREA_ENTITY_FEATURE
         )
+        if CLEAN_AREA_ENTITY_FEATURE:
+            self._attr_supported_features |= CLEAN_AREA_ENTITY_FEATURE
         self._activity_class = activity_class
 
         self._set_attrs()
@@ -1113,6 +1099,50 @@ class DreameVacuum(DreameVacuumEntity, StateVacuumEntity):
         if self._activity_class is None:
             self._attr_state = self._vacuum_state
         self._attr_extra_state_attributes = self.device.status.attributes
+
+    def _get_segments(self) -> list:
+        """Get the segments that can be cleaned."""
+        map_data_list = self.device.status.map_data_list
+        if map_data_list is not None:
+            return [
+                Segment(id=f"{map_data.map_index}_{segment_id}", name=segment.name, group=map_data.map_name)
+                for map_data in self.device.status.map_data_list.values()
+                if map_data.segments is not None and map_data.map_index is not None
+                for segment_id, segment in map_data.segments.items()
+                if segment.visibility is not False
+            ]
+        return []
+
+    async def async_get_segments(self) -> list:
+        """Get the segments that can be cleaned."""
+        return self._get_segments()
+
+    async def async_clean_segments(self, segment_ids: list[str], **kwargs) -> None:
+        """Perform an area clean.
+
+        Only cleans segments from the currently selected map.
+        """
+        selected_map = self.device.status.selected_map
+        if selected_map is None or selected_map.map_index is None:
+            return
+
+        selected_map_index = selected_map.map_index
+
+        # Parse composite IDs and filter to only segments from the selected map
+        int_segment_ids: list[int] = []
+        for composite_id in segment_ids:
+            map_index_str, segment_id_str = composite_id.split("_", 1)
+            if int(map_index_str) == selected_map_index:
+                int_segment_ids.append(int(segment_id_str))
+
+        if not int_segment_ids:
+            return
+
+        await self._try_command(
+            "Unable to call clean_segment: %s",
+            self.device.clean_segment,
+            int_segment_ids,
+        )
 
     @property
     def supported_features(self) -> int:

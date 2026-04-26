@@ -609,7 +609,6 @@ SENSORS: tuple[DreameVacuumSensorEntityDescription, ...] = (
         value_fn=lambda value, device: device.status.drying_left_time,
         entity_category=None,
         exists_fn=lambda description, device: device.capability.self_wash_base
-        and (device.capability.dust_bag_drying or device.capability.manual_dust_bag_drying)
         and DreameVacuumEntityDescription().exists_fn(description, device),
     ),
     DreameVacuumSensorEntityDescription(
