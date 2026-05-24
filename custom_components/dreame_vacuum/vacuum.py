@@ -552,17 +552,10 @@ class DreameVacuum(DreameVacuumEntity, StateVacuumEntity):
         if not int_segment_ids:
             return
 
-        cleaning_times = kwargs.get(INPUT_REPEATS)
-        suction_level = kwargs.get(INPUT_SUCTION_LEVEL)
-        water_volume = kwargs.get(INPUT_WATER_VOLUME)
-
         await self._try_command(
             "Unable to call clean_segment: %s",
             self.device.clean_segment,
             int_segment_ids,
-            cleaning_times,
-            suction_level,
-            water_volume,
         )
 
     @property
