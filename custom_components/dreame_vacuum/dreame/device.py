@@ -1420,9 +1420,9 @@ class DreameVacuumDevice:
     def clean_segment(
         self,
         selected_segments: int | list[int],
-        cleaning_times: int | list[int],
-        suction_level: int | list[int],
-        water_volume: int | list[int],
+        cleaning_times: int | list[int] | None = None,
+        suction_level: int | list[int] | None = None,
+        water_volume: int | list[int] | None = None,
     ) -> dict[str, Any] | None:
         """Clean selected segment using id."""
         self.schedule_update(10)
