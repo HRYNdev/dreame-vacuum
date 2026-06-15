@@ -13,7 +13,8 @@
       "wrong_captcha": "Captcha errato.",
       "credentials_incomplete": "Credenziali incomplete, per favore inserisci username, password e località",
       "login_error": "Controlla le tue credenziali.",
-      "no_devices": "Nessun dispositivo supportato è stato trovato in questo account nella posizione selezionata.{devices}"
+      "no_devices": "Nessun dispositivo supportato è stato trovato in questo account nella posizione selezionata.{devices}",
+      "2fa_send_failed": "Invio del codice di verifica fallito. Riprova."
     },
     "step": {
       "user": {
@@ -42,7 +43,7 @@
         "data": {
           "verification_code": "Codice di verifica a due fattori"
         },
-        "description": "## Questo accesso richiede una verifica di sicurezza\nSi prega di aprire la pagina di verifica per inviare il codice di verifica mobile/email. Dopo aver ricevuto il codice di verifica, non verificarlo sulla pagina web. Torna su HomeAssistant e inseriscilo nel campo di input sottostante.\n### [Invia codice di verifica]({url})"
+        "description": "## Verifica di sicurezza richiesta\nUn codice di verifica è stato inviato. Inserisci il codice qui sotto.\nTentativi rimasti oggi: {count}"
       },
       "captcha": {
         "data": {

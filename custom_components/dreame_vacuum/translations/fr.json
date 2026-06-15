@@ -13,7 +13,8 @@
       "wrong_captcha": "Captcha incorrect.",
       "credentials_incomplete": "Identifiants incomplets, merci de renseigner le nom d'utilisateur, le mot de passe et le pays",
       "login_error": "Impossible de se connecter, vérifiez vos identifiants.",
-      "no_devices": "Aucun appareil compatible n'a été trouvé sur ce compte pour le pays sélectionné.{devices}"
+      "no_devices": "Aucun appareil compatible n'a été trouvé sur ce compte pour le pays sélectionné.{devices}",
+      "2fa_send_failed": "Échec de l'envoi du code de vérification. Veuillez réessayer."
     },
     "step": {
       "user": {
@@ -42,7 +43,7 @@
         "data": {
           "verification_code": "Code de vérification à deux facteurs"
         },
-        "description": "## Cette connexion nécessite une vérification de sécurité\nVeuillez ouvrir la page de vérification pour envoyer le code de vérification mobile/email. Après avoir reçu le code de vérification, ne le vérifiez pas sur la page web. Revenez à HomeAssistant et saisissez-le dans la zone de saisie ci-dessous.\n### [Envoyer le code de vérification]({url})"
+        "description": "## Vérification de sécurité requise\nUn code de vérification a été envoyé. Veuillez saisir le code ci-dessous.\nTentatives restantes aujourd'hui: {count}"
       },
       "captcha": {
         "data": {

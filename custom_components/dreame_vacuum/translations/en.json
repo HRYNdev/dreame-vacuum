@@ -13,7 +13,8 @@
       "wrong_captcha": "Wrong captcha.",
       "credentials_incomplete": "Credentials incomplete, please fill in username, password and country.",
       "login_error": "Could not login, check the credentials.",
-      "no_devices": "No supported devices found in this account on selected country.{devices}"
+      "no_devices": "No supported devices found in this account on selected country.{devices}",
+      "2fa_send_failed": "Failed to send verification code. Please try again."
     },
     "step": {
       "user": {
@@ -37,12 +38,12 @@
           "prefer_cloud": "Prefer cloud connection"
         },
         "description": "Log in to the Xiaomi Miio cloud."
-      },    
+      },
       "2fa": {
         "data": {
           "verification_code": "Two-factor verification code"
         },
-        "description": "## This login requires security verification\nPlease open the verification page to send the mobile/email verification code. After receiving the verification code, do not verify it on the webpage. Go back to HomeAssistant and enter it in the input box below.\n### [Send Verification Code]({url})"
+        "description": "## Security verification required\nA verification code has been sent. Please enter the code below.\nAttempts remaining today: {count}"
       },
       "captcha": {
         "data": {

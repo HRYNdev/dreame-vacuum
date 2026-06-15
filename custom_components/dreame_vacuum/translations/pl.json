@@ -13,7 +13,8 @@
       "wrong_captcha": "Nieprawidłowy captcha.",
       "credentials_incomplete": "Niepoprawne dane logowania, proszę podać nazwę użytkownika, hasło i kraj",
       "login_error": "Nie można się zalogować, sprawdź swoje dane logowania.",
-      "no_devices": "Nie znaleziono obsługiwanych urządzeń na tym koncie w wybranym kraju.{devices}"
+      "no_devices": "Nie znaleziono obsługiwanych urządzeń na tym koncie w wybranym kraju.{devices}",
+      "2fa_send_failed": "Wysyłanie kodu weryfikacyjnego nie powiodło się. Spróbuj ponownie."
     },
     "step": {
       "user": {
@@ -42,7 +43,7 @@
         "data": {
           "verification_code": "Kod weryfikacji dwuetapowej"
         },
-        "description": "## To logowanie wymaga weryfikacji bezpieczeństwa\nProszę otworzyć stronę weryfikacji, aby wysłać kod weryfikacji na telefon komórkowy/e-mail. Po otrzymaniu kodu weryfikacji, nie weryfikuj go na stronie internetowej. Wróć do HomeAssistant i wprowadź go w poniższym polu wejściowym.\n### [Wyślij kod weryfikacji]({url})"
+        "description": "## Wymagana weryfikacja bezpieczeństwa\nKod weryfikacyjny został wysłany. Wpisz kod poniżej.\nPozostałe próby dzisiaj: {count}"
       },
       "captcha": {
         "data": {
