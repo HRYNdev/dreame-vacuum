@@ -14,7 +14,9 @@
       "credentials_incomplete": "Identifiants incomplets, merci de renseigner le nom d'utilisateur, le mot de passe et le pays",
       "login_error": "Impossible de se connecter, vérifiez vos identifiants.",
       "no_devices": "Aucun appareil compatible n'a été trouvé sur ce compte pour le pays sélectionné.{devices}",
-      "2fa_send_failed": "Échec de l'envoi du code de vérification. Veuillez réessayer."
+      "2fa_send_failed": "Échec de l'envoi du code de vérification. Veuillez réessayer.",
+      "2fa_limit_reached": "La limite quotidienne d'envoi de codes de vérification a été atteinte. Veuillez réessayer demain.",
+      "2fa_cooldown_active": "Trop de requêtes consécutives. Veuillez patienter quelques minutes avant de réessayer."
     },
     "step": {
       "user": {
@@ -43,7 +45,7 @@
         "data": {
           "verification_code": "Code de vérification à deux facteurs"
         },
-        "description": "## Vérification de sécurité requise\nUn code de vérification a été envoyé. Veuillez saisir le code ci-dessous.\nTentatives restantes aujourd'hui: {count}"
+        "description": "## Vérification de sécurité requise\nUn code de vérification a été envoyé à {dest}. Veuillez saisir le code ci-dessous."
       },
       "captcha": {
         "data": {

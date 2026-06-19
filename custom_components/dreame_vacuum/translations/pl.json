@@ -14,7 +14,9 @@
       "credentials_incomplete": "Niepoprawne dane logowania, proszę podać nazwę użytkownika, hasło i kraj",
       "login_error": "Nie można się zalogować, sprawdź swoje dane logowania.",
       "no_devices": "Nie znaleziono obsługiwanych urządzeń na tym koncie w wybranym kraju.{devices}",
-      "2fa_send_failed": "Wysyłanie kodu weryfikacyjnego nie powiodło się. Spróbuj ponownie."
+      "2fa_send_failed": "Wysyłanie kodu weryfikacyjnego nie powiodło się. Spróbuj ponownie.",
+      "2fa_limit_reached": "Osiągnięto dzienny limit wysyłania kodów weryfikacyjnych. Spróbuj ponownie jutro.",
+      "2fa_cooldown_active": "Zbyt wiele kolejnych żądań. Odczekaj kilka minut przed ponowną próbą."
     },
     "step": {
       "user": {
@@ -43,7 +45,7 @@
         "data": {
           "verification_code": "Kod weryfikacji dwuetapowej"
         },
-        "description": "## Wymagana weryfikacja bezpieczeństwa\nKod weryfikacyjny został wysłany. Wpisz kod poniżej.\nPozostałe próby dzisiaj: {count}"
+        "description": "## Wymagana weryfikacja bezpieczeństwa\nKod weryfikacyjny został wysłany do {dest}. Wpisz kod poniżej."
       },
       "captcha": {
         "data": {

@@ -14,7 +14,9 @@
       "credentials_incomplete": "Credentials incomplete, please fill in username, password and country.",
       "login_error": "Could not login, check the credentials.",
       "no_devices": "No supported devices found in this account on selected country.{devices}",
-      "2fa_send_failed": "Failed to send verification code. Please try again."
+      "2fa_send_failed": "Failed to send verification code. Please try again.",
+      "2fa_limit_reached": "Daily limit for sending verification codes has been reached. Please try again tomorrow.",
+      "2fa_cooldown_active": "Too many consecutive requests. Please wait a few minutes before trying again."
     },
     "step": {
       "user": {
@@ -43,7 +45,7 @@
         "data": {
           "verification_code": "Two-factor verification code"
         },
-        "description": "## Security verification required\nA verification code has been sent. Please enter the code below.\nAttempts remaining today: {count}"
+        "description": "## Security verification required\nA verification code has been sent to {dest}. Please enter the code below."
       },
       "captcha": {
         "data": {

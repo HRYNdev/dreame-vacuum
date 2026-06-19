@@ -14,7 +14,9 @@
       "credentials_incomplete": "Credenziali incomplete, per favore inserisci username, password e località",
       "login_error": "Controlla le tue credenziali.",
       "no_devices": "Nessun dispositivo supportato è stato trovato in questo account nella posizione selezionata.{devices}",
-      "2fa_send_failed": "Invio del codice di verifica fallito. Riprova."
+      "2fa_send_failed": "Invio del codice di verifica fallito. Riprova.",
+      "2fa_limit_reached": "È stato raggiunto il limite giornaliero per l'invio dei codici di verifica. Riprova domani.",
+      "2fa_cooldown_active": "Troppe richieste consecutive. Si prega di attendere alcuni minuti prima di riprovare."
     },
     "step": {
       "user": {
@@ -43,7 +45,7 @@
         "data": {
           "verification_code": "Codice di verifica a due fattori"
         },
-        "description": "## Verifica di sicurezza richiesta\nUn codice di verifica è stato inviato. Inserisci il codice qui sotto.\nTentativi rimasti oggi: {count}"
+        "description": "## Verifica di sicurezza richiesta\nUn codice di verifica è stato inviato a {dest}. Inserisci il codice qui sotto."
       },
       "captcha": {
         "data": {

@@ -14,7 +14,9 @@
       "credentials_incomplete": "Anmeldedaten unvollständig, bitte gib Benutzername, Passwort und das Land ein",
       "login_error": "Anmeldung nicht möglich, bitte die Anmeldedaten überprüfen.",
       "no_devices": "In diesem Konto wurden für das ausgewählte Land keine unterstützten Geräte gefunden.{devices}",
-      "2fa_send_failed": "Senden des Bestätigungscodes fehlgeschlagen. Bitte versuche es erneut."
+      "2fa_send_failed": "Senden des Bestätigungscodes fehlgeschlagen. Bitte versuche es erneut.",
+      "2fa_limit_reached": "Das tägliche Limit für den Versand von Bestätigungscodes wurde erreicht. Bitte versuchen Sie es morgen erneut.",
+      "2fa_cooldown_active": "Zu viele aufeinanderfolgende Anfragen. Bitte warten Sie einige Minuten, bevor Sie es erneut versuchen."
     },
     "step": {
       "user": {
@@ -43,7 +45,7 @@
         "data": {
           "verification_code": "Two-factor verification code"
         },
-        "description": "## Sicherheitsüberprüfung erforderlich\nEin Bestätigungscode wurde gesendet. Bitte geben Sie den Code unten ein.\nVerbleibende Versuche heute: {count}"
+        "description": "## Sicherheitsüberprüfung erforderlich\nEin Bestätigungscode wurde an {dest} gesendet. Bitte geben Sie den Code unten ein."
       },
       "captcha": {
         "data": {

@@ -100,7 +100,7 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
 
         LOGGER.info("Integration loading: %s", entry.data[CONF_NAME])
                 
-        if CONF_ACCOUNT_TYPE in self._entry.data and self._entry.data[CONF_ACCOUNT_TYPE] != "mi":
+        if CONF_ACCOUNT_TYPE in self._entry.data and self._entry.data[CONF_ACCOUNT_TYPE] != "mi" and self._entry.data[CONF_ACCOUNT_TYPE] != "local":
             raise ConfigEntryError(f"Account type '{self._entry.data[CONF_ACCOUNT_TYPE]}' is not supported with this version of the integration!")
 
         if entry.options.get(CONF_VERSION) != VERSION:
