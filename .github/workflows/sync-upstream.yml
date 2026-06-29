@@ -63,22 +63,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Bump version, push, release
+      - name: Push merge + tagged release
         if: steps.merge.outputs.changed == 'true'
         run: |
+          # ВАЖНО: manifest.json НЕ трогаем — HA loader требует валидный
+          # upstream-формат версии (дефисный суффикс его ломает). Идентичность
+          # форка живёт только в имени git-тега/релиза, по нему HACS отслеживает.
           MAN=custom_components/dreame_vacuum/manifest.json
           UPVER=$(grep -oE '"version"[^,]*' "$MAN" | grep -oE '[0-9][^"]*' | head -1)
-          NEWVER="${UPVER}-ru.${GITHUB_RUN_NUMBER}"
-          python - "$MAN" "$NEWVER" <<'PY'
-          import json, sys
-          p, v = sys.argv[1], sys.argv[2]
-          d = json.load(open(p, encoding="utf-8"))
-          d["version"] = v
-          json.dump(d, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-          PY
-          git commit -am "chore: release ${NEWVER} (synced upstream)"
+          TAG="v${UPVER}-ru.${GITHUB_RUN_NUMBER}"
           git push origin ru
-          gh release create "v${NEWVER}" --title "v${NEWVER}" \
-            --notes "Auto-sync upstream ${UPVER} + RU notifications." --target ru
+          gh release create "$TAG" --title "$TAG" \
+            --notes "Auto-sync upstream v${UPVER} + RU notifications (isolated layer)." --target ru
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
