@@ -6,6 +6,7 @@ import math
 import time
 import traceback
 from homeassistant.components import persistent_notification
+from .notify_ru import translate_notification  # HRYNdev: RU localization of notifications
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     CONF_NAME,
@@ -467,7 +468,7 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
 
             persistent_notification.create(
                 hass=self.hass,
-                message=content,
+                message=translate_notification(content),  # HRYNdev: RU localization
                 title=self._device.name,
                 notification_id=f"{DOMAIN}_{self._device.mac}_{notification_id}",
             )
