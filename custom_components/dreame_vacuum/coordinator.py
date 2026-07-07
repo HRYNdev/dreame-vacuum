@@ -117,6 +117,7 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
         entry: ConfigEntry,
     ) -> None:
         """Initialize global Dreame Vacuum data updater."""
+        self._unsub_dispatcher = None
         self._device: DreameVacuumDevice = None
         self._token = entry.data[CONF_TOKEN]
         self._host = entry.data[CONF_HOST]
@@ -145,7 +146,8 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
                 del options[CONF_MAP_OBJECTS]
 
             options[CONF_VERSION] = VERSION
-            if not options.get(CONF_DONATED):
+            donated = options.get(CONF_DONATED)
+            if donated != True:
                 persistent_notification.create(
                     hass=hass,
                     message=NOTIFICATION_SPONSOR,
@@ -183,7 +185,7 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
 
         super().__init__(hass, LOGGER, name=DOMAIN)
 
-        async_dispatcher_connect(
+        self._unsub_dispatcher = async_dispatcher_connect(
             hass,
             persistent_notification.SIGNAL_PERSISTENT_NOTIFICATIONS_UPDATED,
             self._notification_dismiss_listener,
@@ -284,7 +286,7 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
 
     def _low_water_warning_changed(self, previous_value=None) -> None:
         low_water_warning = self._device.status.low_water_warning
-        if low_water_warning.value > 0 and (not previous_value or low_water_warning.value > 1):
+        if low_water_warning.value > 0:
             low_water_warning_description = self._device.status.low_water_warning_name_description
             self._fire_event(
                 EVENT_LOW_WATER,
@@ -523,9 +525,15 @@ class DreameVacuumDataUpdateCoordinator(DataUpdateCoordinator[DreameVacuumDevice
             LOGGER.warning("Integration start failed: %s", traceback.format_exc())
             if self._device is not None:
                 self._device.listen(None)
+                self._device.listen_error(None)
                 self._device.disconnect()
                 del self._device
                 self._device = None
+                
+            if self._unsub_dispatcher:
+                self._unsub_dispatcher()
+                self._unsub_dispatcher = None
+
             raise UpdateFailed(ex) from ex
 
     @property
