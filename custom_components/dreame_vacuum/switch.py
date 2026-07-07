@@ -146,7 +146,7 @@ SWITCHES: tuple[DreameVacuumSwitchEntityDescription, ...] = (
         property_key=DreameVacuumProperty.INTELLIGENT_RECOGNITION,
         icon_fn=lambda value, device: "mdi:wifi-remove" if value == 0 else "mdi:wifi-marker",
         entity_category=EntityCategory.CONFIG,
-        exists_fn=lambda description, device: device.capability.wifi_map
+        exists_fn=lambda description, device: device.capability.intelligent_recognition
         and DreameVacuumEntityDescription().exists_fn(description, device),
     ),
     DreameVacuumSwitchEntityDescription(
@@ -228,7 +228,7 @@ SWITCHES: tuple[DreameVacuumSwitchEntityDescription, ...] = (
         value_fn=lambda value, device: device.status.custom_order,
         exists_fn=lambda description, device: device.capability.customized_cleaning
         and device.capability.map
-        and not device.capability.cleaning_sequence_v2,
+        and not device.status.cleaning_sequence_v2,
         set_fn=lambda device, value: device.set_cleaning_sequence(
             []
             if not value
@@ -405,7 +405,7 @@ SWITCHES: tuple[DreameVacuumSwitchEntityDescription, ...] = (
     ),
     DreameVacuumSwitchEntityDescription(
         property_key=DreameVacuumAutoSwitchProperty.MAX_SUCTION_POWER,
-        icon="mdi:speedometer",
+        icon="mdi:weather-windy",
         exists_fn=lambda description, device: device.capability.max_suction_power
         and DreameVacuumEntityDescription().exists_fn(description, device),
         entity_category=None,
