@@ -1,0 +1,79 @@
+name: Sync upstream + auto-release (RU)
+
+# Периодически тянет обновления Tasshack/dreame-vacuum в ветку ru.
+# Перевод изолирован в notify_ru.py + 1 строка в coordinator.py, поэтому
+# слияние почти всегда чистое. Если чисто и есть новые коммиты — выпускает
+# новый release, и HACS подтягивает обновление автоматически.
+# При конфликте слияние отменяется и заводится issue (чинить вручную).
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"      # каждый понедельник 04:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork (ru branch, full history)
+        uses: actions/checkout@v4
+        with:
+          ref: ru
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream + fetch
+        run: |
+          git remote add upstream https://github.com/Tasshack/dreame-vacuum.git || true
+          git fetch upstream dev
+
+      - name: Try merge upstream/dev
+        id: merge
+        run: |
+          BEFORE=$(git rev-parse HEAD)
+          if git merge --no-edit upstream/dev; then
+            AFTER=$(git rev-parse HEAD)
+            if [ "$BEFORE" = "$AFTER" ]; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              echo "Нет новых коммитов upstream."
+            else
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            git merge --abort
+            echo "conflict=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open issue on conflict
+        if: steps.merge.outputs.conflict == 'true'
+        run: |
+          gh issue create \
+            --title "Конфликт авто-слияния upstream $(date -u +%F)" \
+            --body "Авто-merge upstream/dev в ветку ru дал конфликт. Нужно слить вручную: \`git fetch upstream && git merge upstream/dev\`, разрулить (скорее всего coordinator.py точка врезки), затем тег." \
+            --label "upstream-sync" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push merge + tagged release
+        if: steps.merge.outputs.changed == 'true'
+        run: |
+          # ВАЖНО: manifest.json НЕ трогаем — HA loader требует валидный
+          # upstream-формат версии (дефисный суффикс его ломает). Идентичность
+          # форка живёт только в имени git-тега/релиза, по нему HACS отслеживает.
+          MAN=custom_components/dreame_vacuum/manifest.json
+          UPVER=$(grep -oE '"version"[^,]*' "$MAN" | grep -oE '[0-9][^"]*' | head -1)
+          TAG="v${UPVER}-ru.${GITHUB_RUN_NUMBER}"
+          git push origin ru
+          gh release create "$TAG" --title "$TAG" \
+            --notes "Auto-sync upstream v${UPVER} + RU notifications (isolated layer)." --target ru
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
