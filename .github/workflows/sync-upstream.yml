@@ -56,10 +56,21 @@ jobs:
       - name: Open issue on conflict
         if: steps.merge.outputs.conflict == 'true'
         run: |
-          gh issue create \
-            --title "Конфликт авто-слияния upstream $(date -u +%F)" \
-            --body "Авто-merge upstream/dev в ветку ru дал конфликт. Нужно слить вручную: \`git fetch upstream && git merge upstream/dev\`, разрулить (скорее всего coordinator.py точка врезки), затем тег." \
-            --label "upstream-sync" || true
+          # Сигнал о конфликте не имеет права молчать. Прежний вариант глотал ошибку
+          # через `|| true`, а завести issue было нельзя по двум причинам сразу:
+          # у форка Issues выключены по умолчанию и метки upstream-sync не существовало.
+          # Шаг оставался зелёным, а перевод тихо замирал на старой версии.
+          TITLE="Конфликт авто-слияния upstream $(date -u +%F)"
+          BODY="Авто-merge upstream/dev в ветку ru дал конфликт. Нужно слить вручную: \`git fetch upstream && git merge upstream/dev\`, разрулить (скорее всего coordinator.py точка врезки), затем тег."
+          gh label create "upstream-sync" --color B60205 --description "Авто-слияние upstream" || true
+          if gh issue create --title "$TITLE" --body "$BODY" --label "upstream-sync"; then
+            echo "Issue заведён."
+          elif gh issue create --title "$TITLE" --body "$BODY"; then
+            echo "Issue заведён без метки."
+          else
+            echo "::error::Конфликт авто-слияния upstream/dev, а issue завести не удалось. Ветка ru осталась на прежней версии, русификация не обновится. Слить вручную."
+            exit 1
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
